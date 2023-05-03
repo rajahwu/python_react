@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request, Request
 from .config import Config
 from flask_login import LoginManager
 from .db import db
@@ -13,3 +13,10 @@ login.login_view = "session.login"
 @app.route("/data")
 def index():
     return { "main": "flask-app" }
+
+
+@app.route("/login", methods=["POST"])
+def login():
+    response = Request.get_json(request)
+    print(dict(response))
+    return response
